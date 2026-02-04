@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login general</title>
+
+<style>
+/* Estilo general del body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Recuadro principal */
+.login-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    width: 300px;
+    text-align: center;
+}
+
+/* Título */
+.login-container h3 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Inputs */
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 50px;
+    border: 2px solid #4A90E2;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+}
+
+/* Botón */
+.login-container button {
+    width: 95%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 50px;
+    border: none;
+    background-color: #4A90E2;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #357ABD;
+}
+
+/* Mensaje */
+#mensaje {
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+    <h3>Iniciar sesión</h3>
+
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <button onclick="acceder()">Ingresar</button>
+
+    <p id="mensaje"></p>
+</div>
+
+<script>
+// LISTA DE USUARIOS
+let usuarios = [
+    { user: "juan", pass: "12345" },
+    { user: "beddy", pass: "23456" },
+    { user: "clisman", pass: "34567" },
+    { user: "nancy", pass: "45678" },
+    { user: "francisco", pass: "56789" },
+    { user: "esther", pass: "678910" }
+];
+
+function acceder() {
+    let usuario = document.getElementById("usuario").value;
+    let password = document.getElementById("password").value;
+    let mensaje = document.getElementById("mensaje");
+
+    let acceso = false;
+
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuario === usuarios[i].user && password === usuarios[i].pass) {
+            acceso = true;
+            break;
+        }
+    }
+
+    if (acceso) {
+        mensaje.style.color = "green";
+        mensaje.innerHTML = "✅ Acceso permitido";
+        
+        // REDIRIGIR A MATEMATICAS
+        setTimeout(() => {
+            window.location.href = "MATEMATICAS.html";
+        }, 800);
+
+    } else {
+        mensaje.style.color = "red";
+        mensaje.innerHTML = "❌ Usuario o contraseña incorrecta";
+    }
+}
+</script>
+
+</body>
+</html>

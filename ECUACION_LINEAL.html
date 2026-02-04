@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecuación Lineal</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* CONTENEDOR PRINCIPAL: COLUMNAS */
+.contenedor-principal {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* COLUMNA DE CONTROLES */
+.columna-controles {
+    background-color: #fff8dc;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    min-width: 250px;
+}
+
+/* COLUMNA DEL CANVAS */
+.columna-canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* INPUTS */
+.columna-controles input {
+    background-color: #BFBFFF;
+    padding: 6px;
+    width: 180px;
+    border-radius: 50px;
+    border: 1px solid #888;
+    text-align: center;
+    margin: 5px;
+}
+
+/* BOTONES */
+.columna-controles button {
+    background-color: yellow;
+    padding: 6px 15px;
+    border-radius: 10px;
+    border: 1px solid #888;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* BOTÓN VOLVER */
+.btn-volver {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 15px;
+    background-color: #f4d03f;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* CANVAS */
+canvas {
+    border: 2px solid black;
+    background: white;
+    max-width: 100%;
+    height: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .contenedor-principal { flex-direction: column; align-items: center; }
+    canvas { width: 350px; height: 350px; }
+}
+
+@media (max-width: 576px) {
+    canvas { width: 300px; height: 300px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor-principal">
+
+    <!-- COLUMNA DE CONTROLES -->
+    <div class="columna-controles">
+        <h3>Cálculo y Gráfica de la Ecuación Lineal de la forma</h3>
+        <h2>y = mx + b</h2>
+
+        <input type="number" id="m" placeholder="Ingrese valor para m">
+        <input type="number" id="b" placeholder="Ingrese valor para b">
+        <br>
+
+        <button onclick="graficar()">Calcular y Graficar</button>
+        <button onclick="limpiar()">Limpiar</button>
+
+        <p id="resultado"></p>
+
+        <a href="MATEMATICAS.html" class="btn-volver">⬅ Volver página anterior</a>
+    </div>
+
+    <!-- COLUMNA DEL CANVAS -->
+    <div class="columna-canvas">
+        <canvas id="grafica" width="400" height="400"></canvas>
+    </div>
+
+</div>
+
+<script>
+function dibujarEjesConNumeros(ctx, canvas) {
+    let centro = 200;
+    let escala = 20;
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.font = "12px Arial";
+
+    // DIBUJAR EJES
+    ctx.beginPath();
+    ctx.moveTo(centro, 0);
+    ctx.lineTo(centro, canvas.height);
+    ctx.moveTo(0, centro);
+    ctx.lineTo(canvas.width, centro);
+    ctx.stroke();
+
+    // EJE X
+    for (let i = -9; i <= 9; i++) {
+        if (i !== 0) {
+            let x = centro + i * escala;
+            ctx.beginPath();
+            ctx.moveTo(x, centro - 5);
+            ctx.lineTo(x, centro + 5);
+            ctx.stroke();
+            ctx.fillText(i, x - 4, centro + 15);
+        }
+    }
+
+    // EJE Y
+    for (let i = -9; i <= 9; i++) {
+        if (i !== 0) {
+            let y = centro - i * escala;
+            ctx.beginPath();
+            ctx.moveTo(centro - 5, y);
+            ctx.lineTo(centro + 5, y);
+            ctx.stroke();
+            ctx.fillText(i, centro + 8, y + 4);
+        }
+    }
+}
+
+function graficar() {
+    let m = parseFloat(document.getElementById("m").value);
+    let b = parseFloat(document.getElementById("b").value);
+
+    if (isNaN(m) || isNaN(b)) {
+        alert("Ingrese valores válidos");
+        return;
+    }
+
+    document.getElementById("resultado").innerHTML =
+        "Ecuación: y = " + m + "x + " + b;
+
+    let canvas = document.getElementById("grafica");
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    dibujarEjesConNumeros(ctx, canvas);
+
+    ctx.beginPath();
+    for (let x = -200; x <= 200; x++) {
+        let y = m * (x / 20) + b;
+        let px = 200 + x;
+        let py = 200 - y * 20;
+        if (x === -200) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+}
+
+function limpiar() {
+    document.getElementById("m").value = "";
+    document.getElementById("b").value = "";
+    document.getElementById("resultado").innerHTML = "";
+    let canvas = document.getElementById("grafica");
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo de Áreas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .recuadro {
+        background-color: #d9edf7; /* color de fondo azul claro */
+        border: 2px solid #31708f; /* borde azul más oscuro */
+        border-radius: 10px;        /* bordes redondeados */
+        padding: 15px;              /* espacio interno */
+        max-width: 800px;           /* ancho máximo del recuadro */
+        margin: 20px auto;          /* centrado horizontal con margen superior/inferior */
+        text-align: center;         /* opcional: centrar el texto */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* sombra para dar relieve */
+        }
+        .contenedor-principal {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .contenedor {
+            background: yellow;
+            width: 200px;
+            margin: 20px;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 80px;
+            box-shadow: 0px 10px 20px black;
+        }
+        
+        input {
+            width: 80%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 7px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        div p {
+            font-weight: bold;
+            color: blue;       
+        }
+
+        div h3 {
+            color: red;
+        }
+        /* TABLET */
+        @media (max-width: 992px) {
+            body { background-color: skyblue; }
+            canvas { width: 250px; height: 250px; }
+        }
+
+        /* CELULAR */
+        @media (max-width: 576px) {
+            body { background-color: burlywood; }
+            canvas { width: 250px; height: 250px; }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Párrafo -->
+                                
+<div class="recuadro">
+    <p>
+        El AREA.- es la medida de la superficie interior de una figura plana 
+        bidimensional, calculada en unidades cuadradas (cm², m², etc). 
+        Representa el espacio interior delimitado por el borde o perímetro.
+    </p>
+</div>
+
+<h1>CÁLCULO DE ÁREAS GEOMÉTRICAS</h1>
+
+<div class="contenedor-principal">
+
+    <!-- RECTÁNGULO -->
+    <div class="contenedor">
+        <h3>Área del Rectángulo</h3>
+        <input type="number" id="baseRect" placeholder="Ingrese base del rectángulo">
+        <input type="number" id="alturaRect" placeholder="Ingrese altura del rectángulo">
+        <br>
+        <button onclick="areaRectangulo()">Calcular</button>
+        <p id="resRectangulo"></p>
+
+        <script>
+            function areaRectangulo() {
+                let b = parseFloat(document.getElementById("baseRect").value);
+                let h = parseFloat(document.getElementById("alturaRect").value);
+                let area = b * h;
+                document.getElementById("resRectangulo").innerHTML = "Área = " + area;
+            }
+        </script>
+    </div>
+
+    <!-- TRIÁNGULO -->
+    <div class="contenedor">
+        <h3>Área del Triángulo</h3>
+        <input type="number" id="baseTri" placeholder="Ingrese base del triángulo">
+        <input type="number" id="alturaTri" placeholder="Ingrese altura del triángulo">
+        <br>
+        <button onclick="areaTriangulo()">Calcular</button>
+        <p id="resTriangulo"></p>
+
+        <script>
+            function areaTriangulo() {
+                let base = parseFloat(document.getElementById("baseTri").value);
+                let altura = parseFloat(document.getElementById("alturaTri").value);
+                let area = (base * altura) / 2;
+                document.getElementById("resTriangulo").innerHTML = "Área = " + area.toFixed(2);
+            }
+        </script>
+    </div>
+
+    <!-- CUADRADO -->
+    <div class="contenedor">
+        <h3>Área del Cuadrado</h3>
+        <input type="number" id="ladoCuad" placeholder="Ingrese lado del cuadrado">
+        <br>
+        <button onclick="areaCuadrado()">Calcular</button>
+        <p id="resCuadrado"></p>
+
+        <script>
+            function areaCuadrado() {
+                let lado = parseFloat(document.getElementById("ladoCuad").value);
+                let area = lado * lado;
+                document.getElementById("resCuadrado").innerHTML = "Área = " + area;
+            }
+        </script>
+    </div>
+
+    <!-- CÍRCULO -->
+    <div class="contenedor">
+        <h3>Área del Círculo</h3>
+        <input type="number" id="radioCir" placeholder="Ingrese radio del círculo">
+        <br>
+        <button onclick="areaCirculo()">Calcular</button>
+        <p id="resCirculo"></p>
+
+        <script>
+            function areaCirculo() {
+                let r = parseFloat(document.getElementById("radioCir").value);
+                let area = 3.1416 * r * r;
+                document.getElementById("resCirculo").innerHTML = "Área = " + area.toFixed(2);
+            }
+        </script>
+    </div>
+
+    
+
+</div>
+<!-- Volver -->
+    <a href="MATEMATICAS.html" class="btn-volver">⬅ Volver a la pagina anterior</a>
+</body>
+</html>
